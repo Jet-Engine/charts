@@ -3,6 +3,20 @@ entries:
   pulsejet-cluster:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-09-20T03:38:19.801500989Z"
+    description: PulsejetDB Multi-Node Cluster with Autodiscovery
+    digest: f3c750d11adfd3079b01523966a87aa8289397e4b5caf0f5480de7c437bc3a7c
+    icon: https://cdn.prod.website-files.com/65f10191f1154a9c3b042f81/6656779e0f11d6ed2ea15641_pulsejetdb_1080x1080-p-500.png
+    maintainers:
+    - email: info@jetengine.tech
+      name: JetEngine Team
+    name: pulsejet-cluster
+    type: application
+    urls:
+    - https://github.com/Jet-Engine/charts/releases/download/pulsejet-cluster-0.1.2/pulsejet-cluster-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-09-20T01:46:21.5010134Z"
     description: PulsejetDB Multi-Node Cluster with Autodiscovery
     digest: a38599b31995576b3365b6505f920a7afb132e4453b71f6d3d9f95b7833dc755
@@ -11,4 +25,4 @@ entries:
     urls:
     - https://github.com/Jet-Engine/charts/releases/download/pulsejet-cluster-0.1.1/pulsejet-cluster-0.1.1.tgz
     version: 0.1.1
-generated: "2024-09-20T01:46:21.50101856Z"
+generated: "2024-09-20T03:38:19.801509716Z"
