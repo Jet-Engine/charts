@@ -13,17 +13,17 @@ spec:
       targetPort: {{ .Values.service.port }}
       protocol: TCP
       name: http
-    - port: { { .Values.service.grpcPort } }
-      targetPort: { { .Values.service.grpcPort } }
+    - port: {{ .Values.service.grpcPort }}
+      targetPort: {{ .Values.service.grpcPort }}
       protocol: TCP
       name: grpc
-    - port: { { .Values.service.clusterPort } }
-      targetPort: { { .Values.service.clusterPort } }
+    - port: {{ .Values.service.clusterPort }}
+      targetPort: {{ .Values.service.clusterPort }}
       protocol: TCP
-      name: grpc
-    - port: { { .Values.service.dashboardPort } }
-      targetPort: { { .Values.service.dashboardPort } }
+      name: cluster
+    - port: {{ .Values.service.dashboardPort }}
+      targetPort: {{ .Values.service.dashboardPort }}
       protocol: TCP
-      name: http
+      name: dash
   selector:
     {{- include "pulsejet-cluster.selectorLabels" . | nindent 4 }}

@@ -15,10 +15,18 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.1.1
+version: 0.1.2
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "1.16.0"
+
+# Maintainers List
+maintainers:
+  - name: JetEngine Team
+    email: info@jetengine.tech
+
+# PulsejetDB Icon
+icon: https://cdn.prod.website-files.com/65f10191f1154a9c3b042f81/6656779e0f11d6ed2ea15641_pulsejetdb_1080x1080-p-500.png
