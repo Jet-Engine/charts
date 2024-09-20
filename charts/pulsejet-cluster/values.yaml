@@ -82,10 +82,14 @@ livenessProbe:
   httpGet:
     path: /healthz
     port: 47044
+  initialDelaySeconds: 10
+  periodSeconds: 5
 readinessProbe:
   httpGet:
     path: /healthz
     port: 47044
+  initialDelaySeconds: 10
+  periodSeconds: 5
 
 autoscaling:
   enabled: false
