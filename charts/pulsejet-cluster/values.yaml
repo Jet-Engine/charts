@@ -50,8 +50,8 @@ ingress:
   enabled: false
   className: ""
   annotations:
-     kubernetes.io/ingress.class: nginx
-     nginx.ingress.kubernetes.io/affinity: "cookie"
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/affinity: "cookie"
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: pulsejet-cluster.default.svc
@@ -75,17 +75,17 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-livenessProbe: null
-readinessProbe: null
+  # livenessProbe: null
+  # readinessProbe: null
 
-#livenessProbe:
-#  httpGet:
-#    path: /healthz
-#    port: 8080
-#readinessProbe:
-#  httpGet:
-#    path: /healthz
-#    port: 8080
+livenessProbe:
+ httpGet:
+   path: /healthz
+   port: 8080
+readinessProbe:
+ httpGet:
+   path: /healthz
+   port: 8080
 
 autoscaling:
   enabled: false
