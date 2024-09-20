@@ -79,13 +79,13 @@ resources: {}
   # readinessProbe: null
 
 livenessProbe:
- httpGet:
-   path: /healthz
-   port: 47044
+  httpGet:
+    path: /healthz
+    port: 47044
 readinessProbe:
- httpGet:
-   path: /healthz
-   port: 47044
+  httpGet:
+    path: /healthz
+    port: 47044
 
 autoscaling:
   enabled: false
