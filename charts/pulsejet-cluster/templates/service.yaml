@@ -20,10 +20,10 @@ spec:
     - port: {{ .Values.service.clusterPort }}
       targetPort: {{ .Values.service.clusterPort }}
       protocol: TCP
-      name: grpc
+      name: cluster
     - port: {{ .Values.service.dashboardPort }}
       targetPort: {{ .Values.service.dashboardPort }}
       protocol: TCP
-      name: http
+      name: dash
   selector:
     {{- include "pulsejet-cluster.selectorLabels" . | nindent 4 }}
