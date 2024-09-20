@@ -23,5 +23,10 @@ version: 0.1.2
 # It is recommended to use it with quotes.
 appVersion: "1.16.0"
 
-# Our icon
+# Maintainers List
+maintainers:
+  - name: JetEngine Team
+    email: info@jetengine.tech
+
+# PulsejetDB Icon
 icon: https://cdn.prod.website-files.com/65f10191f1154a9c3b042f81/6656779e0f11d6ed2ea15641_pulsejetdb_1080x1080-p-500.png
