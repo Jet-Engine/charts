@@ -46,6 +46,11 @@ service:
   clusterPort: 10273
   dashboardPort: 4000
 
+pvcName: pulsejet-cluster
+pvcStorageClass: pulsejet-cluster-pv
+pvcAccessModes:
+  - ReadWriteMany
+
 ingress:
   enabled: false
   className: ""
@@ -92,24 +97,23 @@ readinessProbe:
   periodSeconds: 5
 
 autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 200
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
 
 # Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
+volumes:
+- name: database
+  persistentVolumeClaim:
+    claimName: pulsejet-cluster
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
+volumeMounts:
+- name: database
+  mountPath: "/.database"
+  subPathExpr: $(POD_NAME)
 
 nodeSelector: {}
 
