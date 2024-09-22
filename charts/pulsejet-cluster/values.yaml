@@ -8,7 +8,7 @@ image:
   repository: docker.io/jetngine/pulsejet
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "master"
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -45,6 +45,11 @@ service:
   grpcPort: 47045
   clusterPort: 10273
   dashboardPort: 4000
+
+pvcName: pulsejet-cluster
+pvcStorageClass: pulsejet-cluster-pv
+pvcAccessModes:
+  - ReadWriteMany
 
 ingress:
   enabled: false
@@ -99,17 +104,16 @@ autoscaling:
   targetMemoryUtilizationPercentage: 80
 
 # Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
+volumes:
+- name: database
+  persistentVolumeClaim:
+    claimName: pulsejet-cluster
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
+volumeMounts:
+- name: database
+  mountPath: "/.database"
+  subPathExpr: $(POD_NAME)
 
 nodeSelector: {}
 
