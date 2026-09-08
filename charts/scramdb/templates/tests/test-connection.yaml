@@ -1,0 +1,54 @@
+{{/*
+`helm test` proof: connect over the client Service and run a statement. Uses the
+ScramDB image itself, which already carries psql, so the test adds no second
+image to pull or trust.
+*/}}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ include "scramdb.fullname" . }}-test-connection
+  namespace: {{ include "scramdb.namespace" . }}
+  labels:
+    {{- include "scramdb.labels" . | nindent 4 }}
+    app.kubernetes.io/component: test
+  annotations:
+    helm.sh/hook: test
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+spec:
+  restartPolicy: Never
+  {{- include "scramdb.imagePullSecrets" . | nindent 2 }}
+  {{- if .Values.podSecurityContext.enabled }}
+  securityContext:
+    {{- omit .Values.podSecurityContext "enabled" | toYaml | nindent 4 }}
+  {{- end }}
+  containers:
+    - name: psql
+      image: {{ include "scramdb.image" . }}
+      imagePullPolicy: {{ .Values.image.pullPolicy }}
+      {{- if .Values.containerSecurityContext.enabled }}
+      securityContext:
+        {{- omit .Values.containerSecurityContext "enabled" | toYaml | nindent 8 }}
+      {{- end }}
+      command:
+        - /bin/sh
+        - -c
+        - |
+          set -eu
+          psql "host={{ include "scramdb.fullname" . }} port={{ .Values.service.ports.pgwire }} user={{ .Values.auth.username }} dbname={{ .Values.auth.database }}" \
+            -tAc "select 1"
+      env:
+        - name: HOME
+          value: /tmp
+        {{- if .Values.auth.enabled }}
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "scramdb.authSecretName" . }}
+              key: {{ .Values.auth.secretKeys.passwordKey }}
+        {{- end }}
+      volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+  volumes:
+    - name: tmp
+      emptyDir: {}
